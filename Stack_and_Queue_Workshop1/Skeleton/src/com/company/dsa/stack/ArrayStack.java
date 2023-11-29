@@ -1,32 +1,37 @@
 package com.company.dsa.stack;
 
+import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
+
 public class ArrayStack<E> implements Stack<E> {
     private E[] items;
     private int top;
 
     @Override
     public void push(E element) {
-        throw new UnsupportedOperationException();
+        items[++top] = element;
+
     }
 
     @Override
     public E pop() {
-        throw new UnsupportedOperationException();
+        E element = items[top];
+        items[--top] = null;
+        return element;
     }
 
     @Override
     public E peek() {
-        throw new UnsupportedOperationException();
+        return items[top];
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException();
+        return top + 1;
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException();
+        return top == items.length - 1;
     }
 
 }
