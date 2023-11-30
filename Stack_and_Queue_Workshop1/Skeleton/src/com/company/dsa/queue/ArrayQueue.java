@@ -4,24 +4,28 @@ import java.util.EmptyStackException;
 import java.util.NoSuchElementException;
 
 public class ArrayQueue<E> implements Queue<E> {
+
+    private static final int INITIAL_SIZE = 5;
     private E[] items;
     private int head, tail, size;
+    private int capacity;
 
     public ArrayQueue(){
-        size = 10;
+        size = 0;
         head = -1;
         tail = -1;
-        items = (E[]) new Object[size];
+        items = (E[]) new Object[INITIAL_SIZE];
+        this.capacity = INITIAL_SIZE;
     }
 
     @Override
     public void enqueue(E element) {
         tail++;
-        tail %=size;
-        if (head == tail){
+        if (this.tail == this.capacity){
             resizeItems();
         }
-        items[tail] = element;
+        this.size++;
+        items[this.tail] = element;
     }
 
     @Override
@@ -30,41 +34,37 @@ public class ArrayQueue<E> implements Queue<E> {
             throw new NoSuchElementException();
         }
         head++;
-        head  %= size;
-        E result = items[head];
-        return result;
+        this.size--;
+        E element = this.items[this.head];
+        return element;
     }
 
     @Override
     public E peek() {
-        if (isEmpty()){
+        if (isEmpty()) {
             throw new NoSuchElementException();
         }
-        return items[(head + 1) % size];
+        return this.items[this.head + 1];
     }
 
     @Override
     public int size() {
-        return size;
+        return this.size;
     }
 
     @Override
     public boolean isEmpty() {
-        return head == tail;
+        return this.head == this.tail;
     }
 
     private void resizeItems(){
-        E[] newData = (E[]) new  Object[size * 2];
-        for (int i = 0; i < size; i++){
-            head++;
-            head %= size;
+        this.capacity *= 2;
+        Object[] tmp = new Object[this.capacity];
 
-            newData[i] = items[head];
+        for (int i = 0; i < this.items.length; i++){
+            tmp[i] = this.items[i];
         }
-        items = newData;
-        head = -1;
-        tail = size - 1;
-        size*= 2;
+        this.items = (E[]) tmp;
     }
 
 }
