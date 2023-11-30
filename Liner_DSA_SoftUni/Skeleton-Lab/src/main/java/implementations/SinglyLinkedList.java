@@ -78,6 +78,7 @@ public class SinglyLinkedList<E> implements LinkedList<E> {
             toRemove = toRemove.next;
         }
         preLast.next = null;
+        this.size--;
 
         return toRemove.value;
     }
