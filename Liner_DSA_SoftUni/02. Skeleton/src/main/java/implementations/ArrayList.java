@@ -18,13 +18,7 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public boolean add(E element) {
-        if (notEnoughtCapacity){
-            resize();
-        }
-
-        this.elements[this.size++] = element;
-
-        return true;
+        return false;
     }
 
     @Override
