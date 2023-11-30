@@ -1,6 +1,8 @@
 package com.company.dsa.stack;
 
 import com.company.dsa.Node;
+import java.util.NoSuchElementException;
+
 
 public class LinkedStack<E> implements Stack<E> {
     private Node<E> top;
@@ -8,26 +10,37 @@ public class LinkedStack<E> implements Stack<E> {
 
     @Override
     public void push(E element) {
-        throw new UnsupportedOperationException();
+        Node<E> newNode = new Node();
+        newNode.next = top;
+        top = newNode;
+        size++;
     }
 
     @Override
     public E pop() {
-        throw new UnsupportedOperationException();
+        if (isEmpty()){
+            throw  new NoSuchElementException();
+        }
+        E element = top.data;
+        top = top.next;
+        return element;
     }
 
     @Override
     public E peek() {
-        throw new UnsupportedOperationException();
+        if (isEmpty()){
+            throw new NoSuchElementException();
+        }
+        return top.data;
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException();
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException();
+        return top == null;
     }
 }
