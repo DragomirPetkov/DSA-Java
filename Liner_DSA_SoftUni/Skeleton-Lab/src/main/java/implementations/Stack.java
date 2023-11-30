@@ -11,6 +11,11 @@ public class Stack<E> implements AbstractStack<E> {
     private Node<E> top;
     private int size;
 
+    @Override
+    public Iterator<E> iterator() {
+        return null;
+    }
+
     private static class Node<E> {
         private E value;
         private Node<E> next;
@@ -59,24 +64,24 @@ public class Stack<E> implements AbstractStack<E> {
         return this.size == 0;
     }
 
-    @Override
-    public Iterator<E> iterator() {
-        return new Iterator<E>() {
-            private Node<E> current = top;
-
-            @Override
-            public boolean hasNext() {
-                return this.current != null;
-            }
-
-            @Override
-            public E next() {
-                E value = this.current.value;
-                return this.current = this.current.next;
-                return value;
-            }
-        };
-    }
+//    @Override
+//    public Iterator<E> iterator() {
+//        return new Iterator<E>() {
+//            private Node<E> current = top;
+//
+//            @Override
+//            public boolean hasNext() {
+//                return this.current != null;
+//            }
+//
+//            @Override
+//            public E next() {
+//                E value = this.current.value;
+//                return this.current = this.current.next;
+//                return value;
+//            }
+//        };
+//    }
 
     private void ensureNotEmpty() {
         if (isEmpty()) {
