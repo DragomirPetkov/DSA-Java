@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Jumps {
     public static void main(String[] args) {
@@ -10,7 +9,7 @@ public class Jumps {
         int[] integers = Arrays.stream(scanner.nextLine().split(" "))
                 .mapToInt(Integer::parseInt).toArray();
 
-        List<Integer> result = new ArrayList<>();
+        LinkedList<Integer> result = new LinkedList<>();
         int maxCount = 0;
 
         for (int i = 0; i < integers.length; i++) {
