@@ -1,5 +1,5 @@
 import java.util.*;
-
+import java.util.stream.Collectors;
 
 public class Jumps {
     public static void main(String[] args) {
@@ -16,24 +16,25 @@ public class Jumps {
         for (int i = 0; i < integers.length; i++) {
             int first = integers[i];
             int countJumps = 0;
-            for (int j = i + 1; j < integers.length ; j++) {
+            for (int j = i + 1; j < integers.length; j++) {
                 int second = integers[j];
-                if (first < second){
+                if (first < second) {
                     countJumps++;
                     first = second;
                 }
             }
-            if (countJumps > maxCount){
+            if (countJumps > maxCount) {
                 maxCount = countJumps;
             }
             result.add(countJumps);
         }
         System.out.println(maxCount);
-        for (Integer i : result){
-            if (i == result.size()){
+        for (Integer i : result) {
+            if (i == result.size()) {
                 System.out.print(i);
             }
             System.out.print(i + " ");
         }
     }
 }
+
