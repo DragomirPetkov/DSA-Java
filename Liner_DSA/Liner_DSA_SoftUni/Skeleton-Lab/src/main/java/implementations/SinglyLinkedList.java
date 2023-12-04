@@ -111,20 +111,20 @@ public class SinglyLinkedList<E> implements LinkedList<E> {
 
     @Override
     public Iterator<E> iterator() {
-//        return new Iterator<E>() {
-//            private Node<E> current = head;
-//            @Override
-//            public boolean hasNext() {
-//                return current != null;
-//            }
-//
-//            @Override
-//            public E next() {
-//                E value = current.value;
-//                current = current.next;
-//                return value;
-//            }
-//        };
+        return new Iterator<E>() {
+            private Node<E> current = head;
+            @Override
+            public boolean hasNext() {
+                return current != null;
+            }
+
+            @Override
+            public E next() {
+                E value = current.value;
+                current = current.next;
+                return value;
+            }
+        };
         return null;
     }
 
