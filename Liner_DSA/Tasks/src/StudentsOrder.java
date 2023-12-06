@@ -1,34 +1,46 @@
-import com.company.dsa.LinkedList;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class StudentsOrder {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int[] numbers = Arrays.stream(sc.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        int countStudents = numbers[0];
-        int steps = numbers[1];
+        Scanner scanner = new Scanner(System.in);
 
-        List<String> list = Arrays.stream(sc.nextLine().split(" ")).collect(Collectors.toList());
-        for (int i = 0; i < steps; i++) {
-            String[] names = sc.nextLine().split(" ");
-            for (int j = 0; j < list.size(); j++) {
-                int index = 0;
-                if (list.get(j).equals(names[1])){
-                    index = j;
-                    list.remove(names[0]);
-                    if (j == 0){
-                        list.add(0,names[0]);
-                    }else {
-                        list.add(j-1,names[0]);
+        int countStudents = scanner.nextInt();
+        int pairCount = scanner.nextInt();
+        scanner.nextLine();
+
+        Map<String, Integer> students = new HashMap<>();
+        Map<Integer, String> studentsIntKey = new TreeMap<>();
+
+        for (int i = 0; i < countStudents; i++) {
+            String name = scanner.next();
+            students.put(name, i);
+            studentsIntKey.put(i, name);
+        }
+        scanner.nextLine();
+
+        while (pairCount-- > 0){
+            String[] pairsName = scanner.nextLine().split(" ");
+            int indexFirstName = students.get(pairsName[1]);
+            int indexSecondName = students.get(pairsName[0]);
+            if (indexFirstName < indexSecondName) {
+                for (Map.Entry<String, Integer> entry : students.entrySet()) {
+                    if (entry.getValue() >= indexFirstName && entry.getValue() < indexSecondName) {
+                        entry.setValue(entry.getValue() + 1);
                     }
-                    break;
                 }
+                students.put(pairsName[0], indexFirstName);
+
+            } else if (indexFirstName > indexSecondName) {
+                for (Map.Entry<String, Integer> entry : students.entrySet()) {
+                    if (entry.getValue() > indexSecondName && entry.getValue() < indexFirstName) {
+                        entry.setValue(entry.getValue() - 1);
+                    }
+                }
+                students.put(pairsName[0], indexFirstName - 1);
             }
         }
-        for (String s : list){
-            System.out.print(s +" ");
-        }
+        students.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(e -> System.out.print(e.getKey() + " "));
+
     }
 }
