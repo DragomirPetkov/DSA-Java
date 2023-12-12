@@ -7,8 +7,8 @@ public class ScroogeMcDuckIteration {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        int rows = Integer.parseInt(reader.readLine());
-        int cols = Integer.parseInt(reader.readLine());
+        int rows = reader.read();
+        int cols = reader.read();
         int[][] matrix = new int[rows][cols];
 
         int startRow = 0;
