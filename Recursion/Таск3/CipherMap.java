@@ -1,11 +1,11 @@
 import java.util.*;
 
 public class CipherMap {
-    private static Map<Character, String> cipherLibrary = new HashMap<>();
+
+    private static Map<String, String> maps = new HashMap<>();
     private static String message;
-    private static List<String> variations = new ArrayList<>();
-    private static char[] decipheredMessage = new char[message.length()];
-    private static StringBuilder result = new StringBuilder();
+    private static String result;
+    private static TreeSet<String> toPrint = new TreeSet<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -16,9 +16,9 @@ public class CipherMap {
 
         for (int i = 0; i < cipher.length(); i++) {
             String num = "";
-            char symbols = '\0';
+            String symbols = "";
             if (Character.isAlphabetic(cipher.charAt(i))) {
-                symbols = cipher.charAt(i);
+                symbols = cipher.substring(i,i+1);
             } else {
                 continue;
             }
@@ -31,38 +31,28 @@ public class CipherMap {
                 }
 
             }
-            cipherLibrary.put(symbols, num);
+            maps.put(num,symbols);
         }
-//        decipherMessage(message, decipheredMessage, cipherLibrary);
 
-        Collections.sort(variations);
+        result = "";
+        decripted(message,result,maps);
+        System.out.println(result.length());
+        toPrint.forEach(System.out::println);
 
-        result.append("");
 
-        for (String item : variations) {
-            for (int i = 0; i < item.length(); i++) {
-                if (item.charAt(i) != ' ') {
-                    result.append(item.charAt(i));
-                }
+    }
+    private static void decripted(String message, String result, Map<String, String> maps){
+        int index = message.length();
+
+        if (index == 0){
+            toPrint.add(result);
+        }
+
+        for (int i = 0; i < index; i++) {
+            String current = message.substring(0,i + 1);
+            if (maps.containsKey(current)){
+                decripted(message.substring(i + 1), result + maps.get(current),maps);
             }
-            result.append("\n");
         }
-
-        System.out.println(result.toString());
     }
-
-//    private static void decipherMessage(String message, char[] decipheredMessage, Map<Character, String> cipherLibrary) {
-//        if (decipheredMessage.length == message.length()) {
-//            variations.add(new String(decipheredMessage));
-//            return;
-//        }
-//
-//        String messageToDecipher = message.substring(decipheredMessage.length);
-//
-//        for (Map.Entry<String, Character> kvp : cipherLibrary.entrySet()) {
-//            if (messageToDecipher.startsWith(kvp.getKey())) {
-//                decipheredMessage[decipheredMessage.length] = kvp.getValue();
-//                decipherMessage(messageToDecipher.substring(kvp.getKey().length()), decipheredMessage, cipherLibrary);
-//            }
-//        }
-    }
+}
