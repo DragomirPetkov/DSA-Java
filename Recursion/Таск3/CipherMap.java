@@ -13,7 +13,20 @@ public class CipherMap {
         message = sc.nextLine();
         String cipher = sc.nextLine();
 
+        mapsAdd(cipher);
 
+        print();
+
+    }
+
+    private static void print() {
+        result = "";
+        decripted(message,result,maps);
+        System.out.println(result.length());
+        toPrint.forEach(System.out::println);
+    }
+
+    private static void mapsAdd(String cipher) {
         for (int i = 0; i < cipher.length(); i++) {
             String num = "";
             String symbols = "";
@@ -33,14 +46,8 @@ public class CipherMap {
             }
             maps.put(num,symbols);
         }
-
-        result = "";
-        decripted(message,result,maps);
-        System.out.println(result.length());
-        toPrint.forEach(System.out::println);
-
-
     }
+
     private static void decripted(String message, String result, Map<String, String> maps){
         int index = message.length();
 
