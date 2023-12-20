@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Algoritum.iml" filepath="$PROJECT_DIR$/.idea/Algoritum.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Dsa_FinalPractice/Dsa_FinalPractice.iml" filepath="$PROJECT_DIR$/Dsa_FinalPractice/Dsa_FinalPractice.iml" />
     </modules>
   </component>
 </project>
